@@ -1,0 +1,112 @@
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #ffebef;
+  margin: 0;
+  padding: 0;
+}
+
+.name {
+  color: #fff;
+  font-size: 25px;
+  text-align: center;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.cute-gif-container {
+  position: relative; /* Ensure the container is positioned */
+  z-index: 0; /* Set a lower z-index for the container */
+}
+
+.cute-gif {
+  pointer-events: none; /* Make the GIF "click-through" */
+}
+
+#redeem-button {
+  position: relative;
+  z-index: 1; /* Set a higher z-index for the button */
+}
+
+.view {
+  color: #140606;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.coupon {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #ff6b81;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+#cheer-up {
+  color: #140606;
+  margin: auto;
+  text-align: center;
+}
+
+.coupon:hover {
+  background-color: #fd3f4a;
+}
+
+.coupon.used {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed; /* Show not-allowed cursor for used coupons */
+}
+
+.coupon.blurred {
+  cursor: not-allowed;
+}
+
+.blurred {
+  filter: blur(5px);
+}
+
+.question {
+  color: #140606;
+  text-align: center;
+  margin-top: 20px;
+}
+
+#user-input {
+  width: 80%;
+  padding: 8px;
+  margin-top: 10px;
+}
+
+#submit-wish-button {
+  background-color: #f2a6bf;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+#submit-wish-button:hover {
+  background-color: #77c4d4;
+}
+
+#yes-redeem-this-button {
+  position: absolute;
+  transition: left 0.2s ease, top 0.2s ease; /* Add smooth transition effect */
+}
