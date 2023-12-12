@@ -90,238 +90,70 @@ document.addEventListener("DOMContentLoaded", function () {
         const redeemButton = document.getElementById("redeem-button");
         const backButton = document.getElementById("back-button");
 
-        function handleRedeem() {
-          couponActive = false;
-
-          couponsContainer.childNodes.forEach((otherCoupon) => {
-            otherCoupon.classList.remove("blurred");
-          });
-
+        redeemButton.addEventListener("click", function () {
           if (coupon === "A day without Likwusik ✨") {
             showLikwusikQuestions();
-          } else {
-            couponElement.classList.add("used");
-            viewContainer.innerHTML = "";
-            viewContainer.style.display = "none";
-          }
-        }
-
-        function showLikwusikQuestions() {
-          viewContainer.innerHTML = `
-            <div class="question">
-              <iframe src='pictures/what.gif' alt='What' width='400' height='300' frameborder='0'></iframe>
-              <p>Are you sure?</p>
-              <button id="yes-button">Yes</button>
-              <button id="no-button">No</button>
-            </div>`;
-
-          const yesButton = document.getElementById("yes-button");
-          const noButton = document.getElementById("no-button");
-
-          yesButton.addEventListener("click", function () {
-            showSecondLikwusikQuestion();
-          });
-
-          noButton.addEventListener("click", function () {
-            viewContainer.innerHTML = `
-              <div class="view">
-                ${views[index]}
-                <button id="redeem-button">Redeem the Coupon</button>
-                <button id="back-button">Back</button>
-              </div>`;
-
-            const redeemButton = document.getElementById("redeem-button");
-            const backButton = document.getElementById("back-button");
-
-            redeemButton.addEventListener("click", handleRedeem);
-
-            backButton.addEventListener("click", function () {
-              couponActive = false;
-
-              couponsContainer.childNodes.forEach((otherCoupon) => {
-                otherCoupon.classList.remove("blurred");
-              });
-
-              viewContainer.innerHTML = "";
-              viewContainer.style.display = "none";
-            });
-          });
-        }
-
-        function showSecondLikwusikQuestion() {
-          viewContainer.innerHTML = `
-            <div class="question">
-            <iframe src='pictures/whatwhat.gif' alt='Whatwhat' width='400' height='300' frameborder='0'></iframe>
-              <p>Do you want to be the whole day without Likwusik?</p>
-              <button id="yes-full-day-button">Yes, I do!</button>
-              <button id="no-full-day-button">No</button>
-            </div>`;
-
-          const yesFullDayButton = document.getElementById(
-            "yes-full-day-button"
-          );
-          const noFullDayButton = document.getElementById("no-full-day-button");
-
-          yesFullDayButton.addEventListener("click", function () {
-            showFinalLikwusikMessage(true);
-          });
-
-          noFullDayButton.addEventListener("click", function () {
-            viewContainer.innerHTML = `
-              <div class="view">
-                ${views[index]}
-                <button id="redeem-button">Redeem the Coupon</button>
-                <button id="back-button">Back</button>
-              </div>`;
-
-            const redeemButton = document.getElementById("redeem-button");
-            const backButton = document.getElementById("back-button");
-
-            redeemButton.addEventListener("click", handleRedeem);
-
-            backButton.addEventListener("click", function () {
-              couponActive = false;
-
-              couponsContainer.childNodes.forEach((otherCoupon) => {
-                otherCoupon.classList.remove("blurred");
-              });
-
-              viewContainer.innerHTML = "";
-              viewContainer.style.display = "none";
-            });
-          });
-        }
-
-        function showFinalLikwusikMessage(redeem) {
-          viewContainer.innerHTML = `
-            <div class="question">
-            <iframe src='pictures/redeem.gif' alt='Redeem' width='240' height='220' frameborder='0'></iframe>
-              <p>I see :< Just redeem this coupon then<p>
-              <button id="yes-redeem-this-button">You can redeem</button>
-              <button id="no-redeem-this-button">Back</button>
-            </div>`;
-
-          const redeemThisButton = document.getElementById(
-            "yes-redeem-this-button"
-          );
-          const noRedeemThisButton = document.getElementById(
-            "no-redeem-this-button"
-          );
-
-          // Set initial position
-          let buttonX = 0;
-          let buttonY = 0;
-
-          // Function to update the button position based on the mouse cursor
-          // ...
-
-          function moveButton(event) {
-            // Calculate the distance between the cursor and the button
-            const deltaX = event.clientX - buttonX;
-            const deltaY = event.clientY - buttonY;
-
-            const speedFactor = 0.1;
-            // Calculate the new button position
-            buttonX += deltaX * speedFactor;
-            buttonY += deltaY * speedFactor;
-
-            // Get the dimensions of the view container
-            const viewContainer = document.getElementById("views-container");
-            const viewContainerRect = viewContainer.getBoundingClientRect();
-
-            // Get the dimensions of the coupon description
-            const viewDescription = document.querySelector(".view");
-            const viewDescriptionRect = viewDescription.getBoundingClientRect();
-
-            // Define the size of the dead zone (adjust as needed)
-            const deadZoneSize = 20;
-
-            // Calculate the dead zone boundaries within the coupon description
-            const deadZoneX = viewDescriptionRect.left + deadZoneSize;
-            const deadZoneY = viewDescriptionRect.top + deadZoneSize;
-            const deadZoneWidth = viewDescriptionRect.width - 2 * deadZoneSize;
-            const deadZoneHeight =
-              viewDescriptionRect.height - 2 * deadZoneSize;
-
-            // If the mouse is inside the dead zone, don't update the button position
-            if (
-              event.clientX >= deadZoneX &&
-              event.clientX <= deadZoneX + deadZoneWidth &&
-              event.clientY >= deadZoneY &&
-              event.clientY <= deadZoneY + deadZoneHeight
-            ) {
-              return;
-            }
-
-            // Limit the button movement within the view container area
-            const minX = viewContainerRect.left + deadZoneSize;
-            const minY = viewContainerRect.top + deadZoneSize;
-            const maxX =
-              viewContainerRect.right -
-              redeemThisButton.offsetWidth -
-              deadZoneSize;
-            const maxY =
-              viewContainerRect.bottom -
-              redeemThisButton.offsetHeight -
-              deadZoneSize;
-
-            // Clamp the button position within the specified range
-            buttonX = Math.min(Math.max(buttonX, minX), maxX);
-            buttonY = Math.min(Math.max(buttonY, minY), maxY);
-
-            // Set the button's position
-            redeemThisButton.style.left = `${buttonX}px`;
-            redeemThisButton.style.top = `${buttonY}px`;
-          }
-
-          noRedeemThisButton.addEventListener("click", function () {
-            // Handle the "Back" button click
-            couponActive = false;
-
-            couponsContainer.childNodes.forEach((otherCoupon) => {
-              otherCoupon.classList.remove("blurred");
-            });
-
-            viewContainer.innerHTML = "";
-            viewContainer.style.display = "none";
-
-            // Remove the event listener
-            document.removeEventListener("mousemove", moveButton);
-          });
-        }
-
-        redeemButton.addEventListener("click", function () {
-          if (coupon === "One wish! 🎁") {
+          } else if (coupon === "One wish! 🎁") {
             showUserInput();
           } else {
             handleRedeem();
           }
         });
 
-        function showUserInput() {
+        backButton.addEventListener("click", function () {
+          couponActive = false;
+
+          couponsContainer.childNodes.forEach((otherCoupon) => {
+            otherCoupon.classList.remove("blurred");
+          });
+
+          viewContainer.innerHTML = "";
+          viewContainer.style.display = "none";
+        });
+      }
+      function handleRedeem() {
+        couponActive = false;
+
+        couponsContainer.childNodes.forEach((otherCoupon) => {
+          otherCoupon.classList.remove("blurred");
+          couponElement.classList.add("used");
+          viewContainer.innerHTML = "";
+          viewContainer.style.display = "none";
+        });
+      }
+
+      function showLikwusikQuestions() {
+        viewContainer.innerHTML = `
+          <div class="question">
+            <iframe src='pictures/what.gif' alt='What' width='400' height='300' frameborder='0'></iframe>
+            <p>Are you sure?</p>
+            <button id="yes-button">Yes</button>
+            <button id="no-button">No</button>
+          </div>`;
+
+        const yesButton = document.getElementById("yes-button");
+        const noButton = document.getElementById("no-button");
+
+        yesButton.addEventListener("click", function () {
+          showSecondLikwusikQuestion();
+        });
+
+        noButton.addEventListener("click", function () {
           viewContainer.innerHTML = `
-            <div class="question">
-              <label for="user-input">Enter your wish:</label>
-              <input type="text" id="user-input" placeholder="Your wish here">
-              <button id="submit-wish-button">Submit</button>
-              <button id="back-wish-button">Back</button>
+            <div class="view">
+              ${views[index]}
+              <button id="redeem-button">Redeem the Coupon</button>
+              <button id="back-button">Back</button>
             </div>`;
 
-          const submitWishButton =
-            document.getElementById("submit-wish-button");
-          const backWishButton = document.getElementById("back-wish-button");
+          const redeemButton = document.getElementById("redeem-button");
+          const backButton = document.getElementById("back-button");
 
-          submitWishButton.addEventListener("click", function () {
-            const userInput = document.getElementById("user-input").value;
-            if (userInput.trim() !== "") {
-              // Use the user's input to replace the coupon name
-              couponElement.textContent = userInput;
-              handleRedeem();
-            } else {
-              // Handle empty input, show a message or prompt the user
-            }
+          redeemButton.addEventListener("click", function () {
+            showLikwusikQuestions();
           });
-          backWishButton.addEventListener("click", function () {
+
+          backButton.addEventListener("click", function () {
             couponActive = false;
 
             couponsContainer.childNodes.forEach((otherCoupon) => {
@@ -331,8 +163,149 @@ document.addEventListener("DOMContentLoaded", function () {
             viewContainer.innerHTML = "";
             viewContainer.style.display = "none";
           });
-        }
-        backButton.addEventListener("click", function () {
+        });
+      }
+
+      function showSecondLikwusikQuestion() {
+        viewContainer.innerHTML = `
+          <div class="question">
+          <iframe src='pictures/whatwhat.gif' alt='Whatwhat' width='400' height='300' frameborder='0'></iframe>
+            <p>Do you want to be the whole day without Likwusik?</p>
+            <button id="yes-full-day-button">Yes, I do!</button>
+            <button id="no-full-day-button">No</button>
+          </div>`;
+
+        const yesFullDayButton = document.getElementById("yes-full-day-button");
+        const noFullDayButton = document.getElementById("no-full-day-button");
+
+        yesFullDayButton.addEventListener("click", function () {
+          showFinalLikwusikMessage(true);
+        });
+
+        noFullDayButton.addEventListener("click", function () {
+          viewContainer.innerHTML = `
+            <div class="view">
+              ${views[index]}
+              <button id="redeem-button">Redeem the Coupon</button>
+              <button id="back-button">Back</button>
+            </div>`;
+
+          const redeemButton = document.getElementById("redeem-button");
+          const backButton = document.getElementById("back-button");
+
+          redeemButton.addEventListener("click", function () {
+            showLikwusikQuestions();
+          });
+
+          backButton.addEventListener("click", function () {
+            couponActive = false;
+
+            couponsContainer.childNodes.forEach((otherCoupon) => {
+              otherCoupon.classList.remove("blurred");
+            });
+
+            viewContainer.innerHTML = "";
+            viewContainer.style.display = "none";
+          });
+        });
+      }
+
+      function showFinalLikwusikMessage(redeem) {
+        viewContainer.innerHTML = `
+          <div class="question">
+          <iframe src='pictures/redeem.gif' alt='Redeem' width='240' height='220' frameborder='0'></iframe>
+            <p>I see :< Just redeem this coupon then<p>
+            <button id="yes-redeem-this-button">Redeem</button>
+            <button id="no-redeem-this-button">Back</button>
+          </div>`;
+
+        const redeemThisButton = document.getElementById(
+          "yes-redeem-this-button"
+        );
+        const noRedeemThisButton = document.getElementById(
+          "no-redeem-this-button"
+        );
+
+        let buttonX = 0;
+        let buttonY = 0;
+
+        let velocityX = 0;
+        let velocityY = 0;
+        const dampingFactor = 0.1;
+        const repulsionForce = 50; // Adjust as needed
+
+        // Add event listener for "Back" button click
+        noRedeemThisButton.addEventListener("click", function () {
+          couponActive = false;
+
+          couponsContainer.childNodes.forEach((otherCoupon) => {
+            otherCoupon.classList.remove("blurred");
+          });
+
+          viewContainer.innerHTML = "";
+          viewContainer.style.display = "none";
+        });
+
+        // Add mousemove event listener to update button position
+        document.addEventListener("mousemove", function (event) {
+          const mouseX = event.clientX;
+          const mouseY = event.clientY;
+
+          const couponDescriptionBounds = viewContainer.getBoundingClientRect();
+          const minX = couponDescriptionBounds.left;
+          const minY = couponDescriptionBounds.top;
+          const maxX = couponDescriptionBounds.right;
+          const maxY = couponDescriptionBounds.bottom;
+
+          // Calculate the difference between the button position and the cursor position
+          const deltaX = buttonX - mouseX;
+          const deltaY = buttonY - mouseY;
+
+          // Calculate the force based on the repulsion force
+          const forceX = deltaX / repulsionForce;
+          const forceY = deltaY / repulsionForce;
+
+          // Update the velocity based on the force and damping factor
+          velocityX -= forceX + velocityX + dampingFactor;
+          velocityY -= forceY + velocityY + dampingFactor;
+
+          // Update the button position based on the velocity
+          buttonX += velocityX;
+          buttonY += velocityY;
+
+          // Ensure the button stays within the boundaries of the coupon description
+          buttonX = Math.max(minX, Math.min(buttonX, maxX));
+          buttonY = Math.max(minY, Math.min(buttonY, maxY));
+
+          // Update the button position
+          redeemThisButton.style.left = `${buttonX}px`;
+          redeemThisButton.style.top = `${buttonY}px`;
+        });
+      }
+
+      function showUserInput() {
+        viewContainer.innerHTML = `
+          <div class="question">
+            <label for="user-input">Enter your wish:</label>
+            <input type="text" id="user-input" placeholder="Your wish here">
+            <button id="submit-wish-button">Submit</button>
+            <button id="back-wish-button">Back</button>
+          </div>`;
+
+        const submitWishButton = document.getElementById("submit-wish-button");
+        const backWishButton = document.getElementById("back-wish-button");
+
+        submitWishButton.addEventListener("click", function () {
+          const userInput = document.getElementById("user-input").value;
+          if (userInput.trim() !== "") {
+            // Use the user's input to replace the coupon name
+            couponElement.textContent = userInput;
+            handleRedeem();
+          } else {
+            // Handle empty input, show a message or prompt the user
+          }
+        });
+        backWishButton.addEventListener("click", function () {
           couponActive = false;
 
           couponsContainer.childNodes.forEach((otherCoupon) => {
