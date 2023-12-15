@@ -106,8 +106,14 @@ body {
   background-color: #77c4d4;
 }
 
-#yes-redeem-this-button {
+.yes-redeem-this-button-style {
   transition: left 0.2s ease, top 0.2s ease; /* Add smooth transition effect */
   position: absolute;
-  
+  transform: translate(-50%, -50%); /* Center the button on the cursor */
+}
+.center-image iframe {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
 }

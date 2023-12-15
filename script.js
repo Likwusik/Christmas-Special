@@ -20,21 +20,25 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
 
   const views = [
-    "<p>Redeem this coupon for a day without Likusik's spamming! Enjoy the peace and quiet as long as you can. 😌<div class='gif-container'><iframe src='pictures/dance.gif' alt='Happy' width='600' marginleft='25' height='500' frameborder='0'></iframe></div></p>",
+    "<p>Redeem this coupon for a day without Likusik's spamming! Enjoy the peace and quiet as long as you can. 😌<div class='gif-container center-image'><img src='pictures/spam.gif' alt='Spam' frameborder='0' width:200 height:200></div></p>",
     "<p>Redeem this coupon and enjoy watching what you want without any guilt!🐱‍🏍</p>",
     "<p>Redeem this coupon and enjoy playing the game that you want!😏</p>",
-    "<p>Likusik will be as cute as she can! <div class='gif-container'><iframe src='pictures/cute.gif' alt='Cute' width='600' marginleft='25' height='400' frameborder='0'></iframe></div></p>",
-    "<p>Likusik promises, she will stop doing what she was doing before! Pupunia😨<div class='gif-container'><iframe src='pictures/giphy.gif' alt='Sorry' width='360' marginleft='25' height='270' frameborder='0'></iframe></div></p>",
-    "<p>If you have not eaten the whole day and told me about that, redeem this coupon and I will try to not be your mommy 😡</p>",
-    "<p>Are you tired of Likusik? Do you want to live in peace at least one day? Redeem this code and maybe it will protect you from Likusik for some time!</p>",
-    "<p>If you feel that you need a hug, redeem this code :3 <div class='gif-container'><iframe src='pictures/cute.gif' alt='Cute' width='600' marginleft='25' height='400' frameborder='0'></iframe></div> </p>",
+    "<p>Likusik will be as cute as she can! <div class='gif-container center-image'><img src='pictures/cuuute.gif' alt='Cuuute'></div></p>",
+    "<p>Likusik promises, she will stop doing what she was doing before! Pupunia😨<div class='gif-container center-image'><img src='pictures/pupunia.gif' alt='Sorry'  frameborder='0'></div></p>",
+    "<p>If you have not eaten the whole day and told me about that, redeem this coupon and I will try to not be your mommy 😡<div class='gif-container center-image'><img src='pictures/mom.gif' alt='Mom' frameborder='0'></div></p>",
+    "<p>Are you tired of Likusik? Do you want to live in peace at least one day? Redeem this coupon and maybe it will protect you from Likusik for some time!</p>",
+    "<p>If you feel that you need a hug, redeem this coupon :3 <div class='gif-container center-image'><img src='pictures/good.gif' alt='Good' frameborder='0'></div> </p>",
     "<p>I have no idea what coupon you would like, so I decided to give you a choice to create the coupon yourself 🤗 </p>",
   ];
 
   const cheerUp = [
-    '<img src="pictures/tittameme.png" alt="Meme Titta">',
-    '<iframe src="pictures/hutao.gif" alt="Hutao noot" width="600" marginleft="25" height="300" frameborder="0"></iframe>',
+    '<img src="pictures/tittameme.png" alt="Meme Titta" style="display: block; margin: auto; max-width: 100%; max-height: 100%;">',
+    '<img src="pictures/hutao.gif" alt="Hutao noot" width="600" height="300" frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
     "It is time to distract yourself with your fitness ball!",
+    '<img src="pictures/hutao1.jpg" alt="Hutao 1"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
+    '<img src="pictures/hutao2.jpg" alt="Hutao 2"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
+    '<img src="pictures/hutao3.jpg" alt="Hutao 3"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
+    '<img src="pictures/hutao4.jpg" alt="Hutao 4"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
   ];
 
   cheerUpButton.addEventListener("click", function () {
@@ -214,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
         viewContainer.innerHTML = `
           <div class="question">
           <iframe src='pictures/redeem.gif' alt='Redeem' width='240' height='220' frameborder='0'></iframe>
-            <p>I see :< Just redeem this coupon then<p>
+            <p>I see. Just redeem this coupon then<p>
             <button id="yes-redeem-this-button">Redeem</button>
             <button id="no-redeem-this-button">Back</button>
           </div>`;
@@ -226,26 +230,57 @@ document.addEventListener("DOMContentLoaded", function () {
           "no-redeem-this-button"
         );
 
-        let buttonX = 0;
-        let buttonY = 0;
-
-        // Get the initial position of the button
-        const rect = redeemThisButton.getBoundingClientRect();
-        buttonX = redeemThisButton.offsetLeft + window.scrollX;
-        buttonY = redeemThisButton.offsetTop + window.scrollY;
-
         redeemThisButton.addEventListener("mousemove", function (event) {
+          redeemThisButton.classList.add("yes-redeem-this-button-style");
+
           const buttonWidth = redeemThisButton.clientWidth;
           const buttonHeight = redeemThisButton.clientHeight;
 
-          // Set the button's position
-          redeemThisButton.style.left = event.clientX - buttonWidth / 2 + "px";
-          redeemThisButton.style.top = event.clientY - buttonHeight / 2 + "px";
+          // Get the position of the cursor
+          const mouseX = event.clientX;
+          const mouseY = event.clientY;
+
+          // Get the position of the button
+          const buttonX = redeemThisButton.offsetLeft + buttonWidth / 2;
+          const buttonY = redeemThisButton.offsetTop + buttonHeight / 2;
+
+          // Calculate the distance between the cursor and the button
+          const deltaX = mouseX - buttonX;
+          const deltaY = mouseY - buttonY;
+          const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+
+          const thresholdPercentage = 2;
+
+          const thresholdDistance =
+            (Math.min(viewContainer.clientWidth, viewContainer.clientHeight) *
+              thresholdPercentage) /
+            100;
+
+          if (distance < thresholdDistance) {
+            // If the cursor is too close, move the button away
+            redeemThisButton.style.left =
+              buttonX -
+              deltaX +
+              thresholdDistance / distance -
+              buttonWidth / 2 +
+              "px";
+            redeemThisButton.style.top =
+              buttonY -
+              deltaY +
+              thresholdDistance / distance -
+              buttonHeight / 2 +
+              "px";
+          } else {
+            // Otherwise, set the button's position based on the cursor
+            redeemThisButton.style.left = mouseX - buttonWidth / 2 + "px";
+            redeemThisButton.style.top = mouseY - buttonHeight / 2 + "px";
+          }
         });
 
         // Add event listener for "Back" button click
         noRedeemThisButton.addEventListener("click", function () {
           couponActive = false;
+          redeemThisButton.classList.remove("yes-redeem-this-button-style");
 
           couponsContainer.childNodes.forEach((otherCoupon) => {
             otherCoupon.classList.remove("blurred");
