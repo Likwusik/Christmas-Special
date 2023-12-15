@@ -109,6 +109,5 @@ body {
 #yes-redeem-this-button {
   transition: left 0.2s ease, top 0.2s ease; /* Add smooth transition effect */
   position: absolute;
-  transform: translate(-50%, -50%); /* Center the button on the cursor */
-  z-index: 2; /* Set a high z-index to ensure it's above other elements */
+  
 }

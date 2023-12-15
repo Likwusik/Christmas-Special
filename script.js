@@ -229,10 +229,19 @@ document.addEventListener("DOMContentLoaded", function () {
         let buttonX = 0;
         let buttonY = 0;
 
-        let velocityX = 0;
-        let velocityY = 0;
-        const dampingFactor = 0.1;
-        const repulsionForce = 50; // Adjust as needed
+        // Get the initial position of the button
+        const rect = redeemThisButton.getBoundingClientRect();
+        buttonX = redeemThisButton.offsetLeft + window.scrollX;
+        buttonY = redeemThisButton.offsetTop + window.scrollY;
+
+        redeemThisButton.addEventListener("mousemove", function (event) {
+          const buttonWidth = redeemThisButton.clientWidth;
+          const buttonHeight = redeemThisButton.clientHeight;
+
+          // Set the button's position
+          redeemThisButton.style.left = event.clientX - buttonWidth / 2 + "px";
+          redeemThisButton.style.top = event.clientY - buttonHeight / 2 + "px";
+        });
 
         // Add event listener for "Back" button click
         noRedeemThisButton.addEventListener("click", function () {
@@ -244,42 +253,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
           viewContainer.innerHTML = "";
           viewContainer.style.display = "none";
-        });
-
-        // Add mousemove event listener to update button position
-        document.addEventListener("mousemove", function (event) {
-          const mouseX = event.clientX;
-          const mouseY = event.clientY;
-
-          const couponDescriptionBounds = viewContainer.getBoundingClientRect();
-          const minX = couponDescriptionBounds.left;
-          const minY = couponDescriptionBounds.top;
-          const maxX = couponDescriptionBounds.right;
-          const maxY = couponDescriptionBounds.bottom;
-
-          // Calculate the difference between the button position and the cursor position
-          const deltaX = buttonX - mouseX;
-          const deltaY = buttonY - mouseY;
-
-          // Calculate the force based on the repulsion force
-          const forceX = deltaX / repulsionForce;
-          const forceY = deltaY / repulsionForce;
-
-          // Update the velocity based on the force and damping factor
-          velocityX -= forceX + velocityX + dampingFactor;
-          velocityY -= forceY + velocityY + dampingFactor;
-
-          // Update the button position based on the velocity
-          buttonX += velocityX;
-          buttonY += velocityY;
-
-          // Ensure the button stays within the boundaries of the coupon description
-          buttonX = Math.max(minX, Math.min(buttonX, maxX));
-          buttonY = Math.max(minY, Math.min(buttonY, maxY));
-
-          // Update the button position
-          redeemThisButton.style.left = `${buttonX}px`;
-          redeemThisButton.style.top = `${buttonY}px`;
         });
       }
 
