@@ -52,12 +52,12 @@ body {
 }
 
 .coupon-container {
-  margin-bottom: 20px; /* Increase the space between coupon containers */
+  margin-bottom: 20px; 
 }
 
 .coupon {
   padding: 20px;
-  background-color: #ff6b81;
+  background-color: #ffccd2;
   color: #fff;
   border-radius: 15px;
   font-size: 18px;
@@ -65,17 +65,20 @@ body {
   position: relative;
   overflow: hidden;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+  border: 2px solid #fff;
 }
 
 .coupon:hover {
-  background-color: #fd3f4a; /* Darker pink background color on hover */
-  }
+  background-color: #ff99aa; 
+}
 
 .coupon.used {
-  background-color: #dfe6e9; /* Light gray background color for used coupons */
-  color: #2d3436; /* Dark text color for used coupons */
+  background-color: #dfe6e9;
+  color: #2d3436; 
   cursor: not-allowed;
-  transform: scale(0.95); /* Shrink the used coupon */
+  transform: scale(0.95); 
   transition: background-color 0.3s ease, transform 0.2s ease;
   border: 3px dotted #fff;
 }
@@ -107,7 +110,7 @@ body {
   content: "";
   position: absolute;
   border-radius: 50%;
-  background: #fff; /* White dots color */
+  background: #fff; 
 }
 
 .coupon::before::before {
