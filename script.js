@@ -290,8 +290,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
 
-        // Add event listener for "Back" button click
-        noRedeemThisButton.addEventListener("click", function () {
+          noRedeemThisButton.addEventListener("click", function () {
           couponActive = false;
           redeemThisButton.classList.remove("yes-redeem-this-button-style");
 
@@ -323,7 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
             couponElement.textContent = userInput;
             handleRedeem();
           } else {
-            // Handle empty input, show a message or prompt the user
+            
           }
         });
         backWishButton.addEventListener("click", function () {
