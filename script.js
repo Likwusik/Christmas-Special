@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "<p>Redeem this coupon and enjoy playing the game that you want!😏</p>",
     "<p>Likusik will be as cute as she can! <div class='gif-container center-image'><img src='pictures/cuuute.gif' alt='Cuuute'></div></p>",
     "<p>Likusik promises, she will stop doing what she was doing before! Pupunia😨<div class='gif-container center-image'><img src='pictures/pupunia.gif' alt='Sorry'  frameborder='0'></div></p>",
-    "<p>If you have not eaten the whole day and told me about that, redeem this coupon and I will try to not be your mommy 😡<div class='gif-container center-image'><img src='pictures/mom.gif' alt='Mom' frameborder='0'></div></p>",
+    "<p>If you have not eaten the whole day and told me about that, redeem this coupon and I will try not to be your mommy 😡<div class='gif-container center-image'><img src='pictures/mom.gif' alt='Mom' frameborder='0'></div></p>",
     "<p>Are you tired of Likusik? Do you want to live in peace at least one day? Redeem this coupon and maybe it will protect you from Likusik for some time!</p>",
     "<p>If you feel that you need a hug, redeem this coupon :3 <div class='gif-container center-image'><img src='pictures/good.gif' alt='Good' frameborder='0'></div> </p>",
     "<p>I have no idea what coupon you would like, so I decided to give you a choice to create the coupon yourself 🤗 </p>",
@@ -39,6 +39,19 @@ document.addEventListener("DOMContentLoaded", function () {
     '<img src="pictures/hutao2.jpg" alt="Hutao 2"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
     '<img src="pictures/hutao3.jpg" alt="Hutao 3"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
     '<img src="pictures/hutao4.jpg" alt="Hutao 4"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
+    '<a href="https://www.youtube.com/watch?v=h5JiF3YPs54&list=PLrl-lHUjZCqcYoAZVA4BkaeMixMzDCd7C&index=16&t=321s">Froggy Songs for you</a>',
+    '<a href="https://www.youtube.com/watch?v=FSOj7UKsVe8&list=PLrl-lHUjZCqcYoAZVA4BkaeMixMzDCd7C&index=124">I love you so-so-so-so mucchhhh</a>',
+    '<a href="https://www.youtube.com/watch?v=Q5BNLaZWdck&list=PLrl-lHUjZCqcYoAZVA4BkaeMixMzDCd7C&index=123">Oooo-o-o-oooo-oo :3</a>',
+    '<img src="pictures/sayu.jpg" alt="Sayu"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
+    "- That dog is so cute! <br>- Who? <br>- Dog! <br> - ... <br>- Haw haw! <br> - Ahh, <i>dooog...<i>",
+    "Sowen! Everything will be alright! Just text to Likusik and she will make you feel better :3",
+    "Hello, Hazimausowen! Smile😊",
+    "I wanted to add here a lot of memes, but I have no idea what could be okay. Imagine that there is a reaaaally funny meme!",
+    '<img src="pictures/meme.jpg" alt="Meme"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
+    '<img src="pictures/cheese.jpg" alt="Cheese"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
+    '<img src="pictures/kitty.jpg" alt="Kitty"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
+    '<img src="pictures/important.jpg" alt="Important"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
+    '<img src="pictures/flower.jpg" alt="Flower"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
   ];
 
   cheerUpButton.addEventListener("click", function () {
