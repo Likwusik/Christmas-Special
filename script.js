@@ -341,10 +341,4 @@ document.addEventListener("DOMContentLoaded", function () {
     couponsContainer.appendChild(couponContainer);
   });
 
-  function displayView(view) {
-    viewsContainer.innerHTML = "";
-    const viewElement = document.createElement("div");
-    viewElement.innerHTML = view;
-    viewsContainer.appendChild(viewElement);
-  }
 });
