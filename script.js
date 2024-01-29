@@ -7,76 +7,96 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let couponActive = false;
 
+  //localStorage.clear();
+
+  //LocalStorage logic
+  if (localStorage.getItem("usedCoupons") === null) {
+    localStorage.setItem("usedCoupons", "[]");
+  }
+
+  // Reset button logic
+  document
+    .getElementById("reset-button")
+    .addEventListener("click", function () {
+      localStorage.setItem("usedCoupons", "[]");
+      let coupons = document.getElementsByClassName("coupon");
+      for (let i = 0; i < coupons.length; i++) {
+        coupons.item(i).classList.remove("used");
+      }
+    });
+
+  // Coupon name - you can add custom coupons or change the example that I did
   const coupons = [
-    "No-Spam Day📩",
-    "You choose what we will watch in the evening 🤗",
-    "You choose what we will play in the evening 😊",
+    "A day outside for you! 😊",
+    "You choose what we will watch next 🤗",
+    "You choose what we will play next 👻",
     "Unlimited cuteness whenever you need it! 🥰",
-    "A saveword! 🐾",
-    "No mommy behavior! 🥪🚫",
-    "A day without Likwusik ✨",
-    "Virtual hugs for cutie pattootie ❤",
+    "A saveword!",
+    "Food for you 🥪",
+    "A day without me ✨",
+    "Virtual hug",
     "One wish! 🎁",
+    // add more if you need
   ];
 
+  // Coupon description - you can add custom coupon description or change the example that I did
   const views = [
-    "<p>Redeem this coupon for a day without Likusik's spamming! Enjoy the peace and quiet as long as you can. 😌<div class='gif-container center-image'><img src='pictures/spam.gif' alt='Spam' frameborder='0' width:200 height:200></div></p>",
-    "<p>Redeem this coupon and enjoy watching what you want without any guilt!🐱‍🏍</p>",
-    "<p>Redeem this coupon and enjoy playing the game that you want!😏</p>",
-    "<p>Likusik will be as cute as she can! <div class='gif-container center-image'><img src='pictures/cuuute.gif' alt='Cuuute'></div></p>",
-    "<p>Likusik promises, she will stop doing what she was doing before! Pupunia😨<div class='gif-container center-image'><img src='pictures/pupunia.gif' alt='Sorry'  frameborder='0'></div></p>",
-    "<p>If you have not eaten the whole day and told me about that, redeem this coupon and I will try not to be your mommy 😡<div class='gif-container center-image'><img src='pictures/mom.gif' alt='Mom' frameborder='0'></div></p>",
-    "<p>Are you tired of Likusik? Do you want to live in peace at least one day? Redeem this coupon and maybe it will protect you from Likusik for some time!</p>",
-    "<p>If you feel that you need a hug, redeem this coupon :3 <div class='gif-container center-image'><img src='pictures/good.gif' alt='Good' frameborder='0'></div> </p>",
-    "<p>I have no idea what coupon you would like, so I decided to give you a choice to create the coupon yourself 🤗 </p>",
+    "<p>Redeem this coupon for a day when you choose what we will do outside! Enjoy this as long as you can. 😌<div class='gif-container center-image'><img src='pictures/dayOutside.gif' alt='Day outside' frameborder='0' width:200 height:200></div></p>",
+    "<p>Redeem this coupon and enjoy watching what you want without any guilt!</p>",
+    "<p>Redeem this coupon and enjoy playing the game that you want!</p>",
+    "<p>I will be as cute as I can! <div class='gif-container center-image'><img src='pictures/cuuute.gif' alt='Cuuute'></div></p>",
+    "<p>I promise, I will stop doing what I was doing before!<div class='gif-container center-image'><img src='pictures/saveword.gif' alt='Sorry'  frameborder='0'></div></p>",
+    "<p>Redeem this coupon if you want to eat something special<div class='gif-container center-image'><img src='pictures/food.gif' alt='Food' frameborder='0'></div></p>",
+    "<p>Are you tired of me? Do you want to live in peace at least one day? Redeem this coupon and maybe it will protect for some time!</p>",
+    "<p>If you feel that you need a hug, redeem this coupon <div class='gif-container center-image'><img src='pictures/good.gif' alt='Good' frameborder='0'></div> </p>",
+    "<p>I have no idea what coupon you would like, so I decided to give you a chance to create the coupon yourself 🤗 </p>",
+    // add more if you need
   ];
 
+  // CheerUp phrases - you can add custom phrases/memes/videos or change the example that I did
   const cheerUp = [
-    '<img src="pictures/tittameme.png" alt="Meme Titta" style="display: block; margin: auto; max-width: 100%; max-height: 100%;">',
-    '<img src="pictures/hutao.gif" alt="Hutao noot" width="600" height="300" frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
-    "It is time to distract yourself with your fitness ball!",
-    '<img src="pictures/hutao1.jpg" alt="Hutao 1"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
-    '<img src="pictures/hutao2.jpg" alt="Hutao 2"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
-    '<img src="pictures/hutao3.jpg" alt="Hutao 3"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
-    '<img src="pictures/hutao4.jpg" alt="Hutao 4"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
-    '<a href="https://www.youtube.com/watch?v=h5JiF3YPs54&list=PLrl-lHUjZCqcYoAZVA4BkaeMixMzDCd7C&index=16&t=321s">Froggy Songs for you</a>',
-    '<a href="https://www.youtube.com/watch?v=FSOj7UKsVe8&list=PLrl-lHUjZCqcYoAZVA4BkaeMixMzDCd7C&index=124">I love you so-so-so-so mucchhhh</a>',
-    '<a href="https://www.youtube.com/watch?v=Q5BNLaZWdck&list=PLrl-lHUjZCqcYoAZVA4BkaeMixMzDCd7C&index=123">Oooo-o-o-oooo-oo :3</a>',
-    '<img src="pictures/sayu.jpg" alt="Sayu"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
-    "- That dog is so cute! <br>- Who? <br>- Dog! <br> - ... <br>- Haw haw! <br> - Ahh, <i>dooog...<i>",
-    "Sowen! Everything will be alright! Just text to Likusik and she will make you feel better :3",
-    "Hello, Hazimausowen! Smile😊",
-    "I wanted to add here a lot of memes, but I have no idea what could be okay. Imagine that there is a reaaaally funny meme!",
+    '<a href="https://www.youtube.com/watch?v=_BtXPQimVhg&t=2030s">No stress</a>',
+    '<a href="https://www.youtube.com/watch?v=Q5BNLaZWdck">Oooo-o-o-oooo-oo</a>',
+    "Everything will be alright! Just text to me and we solve the problem together",
+    "Hello! Smile😊",
+    "I wanted to add here a lot of memes, but I have no idea what could be funny. Imagine that there is a reaaaally funny meme!",
     '<img src="pictures/meme.jpg" alt="Meme"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
-    '<img src="pictures/cheese.jpg" alt="Cheese"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
-    '<img src="pictures/kitty.jpg" alt="Kitty"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
     '<img src="pictures/important.jpg" alt="Important"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
     '<img src="pictures/flower.jpg" alt="Flower"  frameborder="0" margin: auto; max-width:auto; max-height:auto;>',
+    // add more if you need
   ];
 
+  // CheerUp phrases appear randomly after you click the cheerUp button
   cheerUpButton.addEventListener("click", function () {
     couponsContainer.style.display = "none";
     mainName.style.display = "none";
+    document.getElementById("reset-button").style.display = "none";
+
     const randomCheerUp = cheerUp[Math.floor(Math.random() * cheerUp.length)];
     document.getElementById("cheer-up").innerHTML = `<p>${randomCheerUp}</p>`;
     bringBackButton.style.display = "inline-block";
     document.getElementById("cheer-up").style.display = "block";
   });
 
+  // Back button logic
   bringBackButton.addEventListener("click", function () {
     couponsContainer.style.display = "block";
     mainName.style.display = "block";
+    document.getElementById("reset-button").style.display = "block";
     viewsContainer.innerHTML = "";
     bringBackButton.style.display = "none";
     document.getElementById("cheer-up").style.display = "none";
   });
 
+  // Coupon description apprearing logic
   coupons.forEach((coupon, index) => {
     const couponContainer = document.createElement("div");
     couponContainer.classList.add("coupon-container");
 
     const couponElement = document.createElement("div");
+    couponElement.setAttribute("id", "coup");
     couponElement.classList.add("coupon");
+    couponElement.classList.add("hover");
     couponElement.textContent = coupon;
 
     const viewContainer = document.createElement("div");
@@ -85,6 +105,41 @@ document.addEventListener("DOMContentLoaded", function () {
     couponContainer.appendChild(couponElement);
     couponContainer.appendChild(viewContainer);
 
+    handleRedeem(true);
+
+    function handleRedeem(initial = false) {
+      let used = isCouponUsed(index);
+      if ((!initial && !used) || (initial && used)) {
+        couponActive = false;
+
+        couponsContainer.childNodes.forEach((otherCoupon) => {
+          otherCoupon.classList.remove("blurred");
+        });
+
+        couponElement.classList.add("used");
+        viewContainer.innerHTML = "";
+        viewContainer.style.display = "none";
+
+        // Mark the coupon as used
+        markCouponAsUsed(index);
+      }
+    }
+
+    // Function to check if a coupon is already used
+    function isCouponUsed(coupon) {
+      const usedCoupons = JSON.parse(localStorage.getItem("usedCoupons"));
+      return usedCoupons.includes(coupon);
+    }
+
+    // Function to mark a coupon as used
+    function markCouponAsUsed(coupon) {
+      const usedCoupons = JSON.parse(localStorage.getItem("usedCoupons"));
+
+      usedCoupons.push(coupon);
+      localStorage.setItem("usedCoupons", JSON.stringify(usedCoupons));
+    }
+
+    // Coupon using logic
     couponElement.addEventListener("click", function () {
       if (!couponElement.classList.contains("used") && !couponActive) {
         couponActive = true;
@@ -93,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
           if (otherIndex !== index) {
             otherCoupon.classList.add("blurred");
           }
+          otherCoupon.querySelector("#coup").classList.remove("hover");
         });
 
         viewContainer.innerHTML = `
@@ -107,9 +163,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const redeemButton = document.getElementById("redeem-button");
         const backButton = document.getElementById("back-button");
 
+        // Exeptions "A day without me" and "One wish"
         redeemButton.addEventListener("click", function () {
-          if (coupon === "A day without Likwusik ✨") {
-            showLikwusikQuestions();
+          if (coupon === "A day without me ✨") {
+            showQuestions();
           } else if (coupon === "One wish! 🎁") {
             showUserInput();
           } else {
@@ -128,18 +185,9 @@ document.addEventListener("DOMContentLoaded", function () {
           viewContainer.style.display = "none";
         });
       }
-      function handleRedeem() {
-        couponActive = false;
 
-        couponsContainer.childNodes.forEach((otherCoupon) => {
-          otherCoupon.classList.remove("blurred");
-          couponElement.classList.add("used");
-          viewContainer.innerHTML = "";
-          viewContainer.style.display = "none";
-        });
-      }
-
-      function showLikwusikQuestions() {
+      // Special logic for "A day without me" coupon
+      function showQuestions() {
         viewContainer.innerHTML = `
           <div class="question">
             <iframe src='pictures/what.gif' alt='What' width='400' height='300' frameborder='0'></iframe>
@@ -152,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const noButton = document.getElementById("no-button");
 
         yesButton.addEventListener("click", function () {
-          showSecondLikwusikQuestion();
+          showSecondQuestion();
         });
 
         noButton.addEventListener("click", function () {
@@ -167,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const backButton = document.getElementById("back-button");
 
           redeemButton.addEventListener("click", function () {
-            showLikwusikQuestions();
+            showQuestions();
           });
 
           backButton.addEventListener("click", function () {
@@ -175,6 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             couponsContainer.childNodes.forEach((otherCoupon) => {
               otherCoupon.classList.remove("blurred");
+              otherCoupon.querySelector("#coup").classList.add("hover");
             });
 
             viewContainer.innerHTML = "";
@@ -183,11 +232,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       }
 
-      function showSecondLikwusikQuestion() {
+      function showSecondQuestion() {
         viewContainer.innerHTML = `
           <div class="question">
           <iframe src='pictures/whatwhat.gif' alt='Whatwhat' width='400' height='300' frameborder='0'></iframe>
-            <p>Do you want to be the whole day without Likwusik?</p>
+            <p>Do you want to be the whole day without me?</p>
             <button id="yes-full-day-button">Yes, I do!</button>
             <button id="no-full-day-button">No</button>
           </div>`;
@@ -196,7 +245,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const noFullDayButton = document.getElementById("no-full-day-button");
 
         yesFullDayButton.addEventListener("click", function () {
-          showFinalLikwusikMessage(true);
+          showFinalMessage(true);
         });
 
         noFullDayButton.addEventListener("click", function () {
@@ -211,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const backButton = document.getElementById("back-button");
 
           redeemButton.addEventListener("click", function () {
-            showLikwusikQuestions();
+            showQuestions();
           });
 
           backButton.addEventListener("click", function () {
@@ -219,6 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             couponsContainer.childNodes.forEach((otherCoupon) => {
               otherCoupon.classList.remove("blurred");
+              otherCoupon.querySelector("#coup").classList.add("hover");
             });
 
             viewContainer.innerHTML = "";
@@ -227,7 +277,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       }
 
-      function showFinalLikwusikMessage(redeem) {
+      function showFinalMessage(redeem) {
         viewContainer.innerHTML = `
           <div class="question">
           <iframe src='pictures/redeem.gif' alt='Redeem' width='240' height='220' frameborder='0'></iframe>
@@ -243,6 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
           "no-redeem-this-button"
         );
 
+        //Button escaping logic
         redeemThisButton.addEventListener("mousemove", function (event) {
           redeemThisButton.classList.add("yes-redeem-this-button-style");
 
@@ -290,12 +341,13 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
 
-          noRedeemThisButton.addEventListener("click", function () {
+        noRedeemThisButton.addEventListener("click", function () {
           couponActive = false;
           redeemThisButton.classList.remove("yes-redeem-this-button-style");
 
           couponsContainer.childNodes.forEach((otherCoupon) => {
             otherCoupon.classList.remove("blurred");
+            otherCoupon.querySelector("#coup").classList.add("hover");
           });
 
           viewContainer.innerHTML = "";
@@ -303,6 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       }
 
+      //Logic for "One wish" coupon
       function showUserInput() {
         viewContainer.innerHTML = `
           <div class="question">
@@ -322,7 +375,6 @@ document.addEventListener("DOMContentLoaded", function () {
             couponElement.textContent = userInput;
             handleRedeem();
           } else {
-            
           }
         });
         backWishButton.addEventListener("click", function () {
@@ -330,6 +382,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           couponsContainer.childNodes.forEach((otherCoupon) => {
             otherCoupon.classList.remove("blurred");
+            otherCoupon.querySelector("#coup").classList.add("hover");
           });
 
           viewContainer.innerHTML = "";
@@ -340,5 +393,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     couponsContainer.appendChild(couponContainer);
   });
-
 });

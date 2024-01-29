@@ -1,6 +1,6 @@
 body {
   font-family: "Arial", sans-serif;
-  background-color: #ffebef;
+  background-color: #fff2b1;
   margin: 0;
   padding: 0;
 }
@@ -52,12 +52,12 @@ body {
 }
 
 .coupon-container {
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 .coupon {
   padding: 20px;
-  background-color: #ffccd2;
+  background-color: rgb(255, 203, 148);
   color: #fff;
   border-radius: 15px;
   font-size: 18px;
@@ -66,19 +66,19 @@ body {
   overflow: hidden;
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
+
   border: 2px solid #fff;
 }
 
-.coupon:hover {
-  background-color: #ff99aa; 
+.hover:hover {
+  background-color: #f57a5b;
 }
 
 .coupon.used {
   background-color: #dfe6e9;
-  color: #2d3436; 
+  color: #2d3436;
   cursor: not-allowed;
-  transform: scale(0.95); 
+  transform: scale(0.95);
   transition: background-color 0.3s ease, transform 0.2s ease;
   border: 3px dotted #fff;
 }
@@ -103,103 +103,6 @@ body {
   right: 10px;
 }
 
-.coupon::before::before,
-.coupon::before::after,
-.coupon::after::before,
-.coupon::after::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  background: #fff; 
-}
-
-.coupon::before::before {
-  top: -5px;
-  left: -5px;
-  width: 20px;
-  height: 20px;
-}
-
-.coupon::before::after {
-  top: -5px;
-  right: -5px;
-  width: 20px;
-  height: 20px;
-}
-
-.coupon::after::before {
-  bottom: -5px;
-  left: -5px;
-  width: 20px;
-  height: 20px;
-}
-
-.coupon::after::after {
-  bottom: -5px;
-  right: -5px;
-  width: 20px;
-  height: 20px;
-}
-
-.coupon::before::before::before,
-.coupon::before::before::after,
-.coupon::before::after::before,
-.coupon::before::after::after,
-.coupon::after::before::before,
-.coupon::after::before::after,
-.coupon::after::after::before,
-.coupon::after::after::after {
-  content: "";
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: #fff; /* White dots color */
-}
-
-.coupon::before::before::before {
-  top: -10px;
-  left: -10px;
-}
-
-.coupon::before::before::after {
-  top: -10px;
-  right: -10px;
-}
-
-.coupon::before::after::before {
-  bottom: -10px;
-  left: -10px;
-}
-
-.coupon::before::after::after {
-  bottom: -10px;
-  right: -10px;
-}
-
-.coupon::after::before::before {
-  top: -10px;
-  left: -10px;
-}
-
-.coupon::after::before::after {
-  top: -10px;
-  right: -10px;
-}
-
-.coupon::after::after::before {
-  bottom: -10px;
-  left: -10px;
-}
-
-.coupon::after::after::after {
-  bottom: -10px;
-  right: -10px;
-}
-
-.coupon.blurred {
-  cursor: not-allowed;
-}
-
 .blurred {
   filter: blur(5px);
 }
@@ -217,7 +120,7 @@ body {
 }
 
 #submit-wish-button {
-  background-color: #f2a6bf;
+  background-color: #fab1a0;
   color: white;
   padding: 10px;
   margin-top: 10px;
@@ -227,7 +130,7 @@ body {
 }
 
 #submit-wish-button:hover {
-  background-color: #77c4d4;
+  background-color: #ff7675;
 }
 
 .yes-redeem-this-button-style {
@@ -243,7 +146,7 @@ body {
 }
 
 button {
-  background-color: #ffeaa7;
+  background-color: #fc8282;
   color: #140606;
   padding: 10px;
   cursor: pointer;
@@ -253,7 +156,7 @@ button {
 }
 
 button:hover {
-  background-color: #fdcb6e;
+  background-color: #bc4949;
 }
 
 #cheer-up-button,
@@ -269,5 +172,23 @@ button:hover {
 }
 
 #user-input {
-  margin-bottom: 10px; /* You can adjust this value as needed */
+  margin-bottom: 10px;
+}
+
+#reset-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fbc941;
+  padding: 10px 10px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 6px;
+}
+
+#reset-button:hover {
+  background-color: rgb(255, 125, 78);
 }
